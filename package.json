@@ -1,6 +1,6 @@
 {
   "name": "semantic-deployment-app",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "scripts": {
     "ng": "ng",
     "release": "semantic-release",
