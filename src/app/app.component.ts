@@ -46,7 +46,6 @@ export class AppComponent implements OnInit {
             break;
         }
       });
-
       console.log("update installed");
     }
   }
