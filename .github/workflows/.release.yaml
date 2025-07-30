@@ -27,7 +27,7 @@ jobs:
       - name: Install Node dependencies
         run: npm ci
 
-        - name: Setup Keys
+      - name: Setup Keys
         uses: tauri-apps/tauri-action@v0
         env:
           TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
@@ -36,7 +36,7 @@ jobs:
         run: |
           rustup update stable
           rustup target add x86_64-pc-windows-msvc
-          npm install -g @tauri-apps/cli      
+          npm install -g @tauri-apps/cli
 
       - name: Build Tauri app
         run: npm run tauri build
