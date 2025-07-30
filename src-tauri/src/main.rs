@@ -2,5 +2,5 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 fn main() {
-    semantic_deployment_app_lib::run()
+    semantic_deployment_app_lib::run();
 }
