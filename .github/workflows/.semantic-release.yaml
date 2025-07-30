@@ -4,21 +4,34 @@ on:
   push:
     branches:
       - main
+      - dev/*
+      - feature/*
+      - hotfix/*
 
 jobs:
   release:
+    if: "!contains(github.event.head_commit.message, '[skip ci]')"
+
+    name: Release
     runs-on: windows-latest
+    permissions:
+      contents: write
 
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0 # Required for semantic-release
+          fetch-depth: 0
+          persist-credentials: false
 
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 22
+
+      - name: Prepare prerelease semantic
+        if: github.ref != 'refs/heads/main'
+        run: mv .releaserc.prerelease.yaml .releaserc.yaml
 
       - name: Install Node dependencies
         run: npm ci
@@ -29,10 +42,17 @@ jobs:
           rustup target add x86_64-pc-windows-msvc
           npm install -g @tauri-apps/cli
 
-      - name: Run semantic-release
+      - name: Semantic Release
+        uses: cycjimmy/semantic-release-action@v2
+        id: semantic
+        with:
+          semantic_version: 17
+          extra_plugins: |
+            @semantic-release/changelog@5
+            @semantic-release/exec@5
+            @semantic-release/git@9
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Built-in
-        run: npx semantic-release
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build Tauri app
         run: npm run tauri build
