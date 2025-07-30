@@ -13,8 +13,10 @@
     "windows": [
       {
         "title": "semantic-deployment-app",
-        "width": 800,
-        "height": 600
+        "width": 1280,
+        "height": 768,
+        "center": true,
+        "focus": true
       }
     ],
     "security": {
@@ -40,7 +42,7 @@
         "https://github.com/francois-smith/Semantic-Test-App/releases/latest/download/latest.json"
       ],
       "windows": {
-        "installMode": "passive"
+        "installMode": "basicUi"
       }
     }
   }
