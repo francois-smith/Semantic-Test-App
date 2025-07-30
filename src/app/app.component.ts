@@ -15,12 +15,10 @@ import { getCurrentWindow } from "@tauri-apps/api/window";
 })
 export class AppComponent implements OnInit {
   ngOnInit(): void {
-    console.log("Here ");
+    this.setAppTitleWithVersion();
   }
 
-  async ngAfterViewInit(): Promise<void> {
-    this.setAppTitleWithVersion();
-
+  async checkUpdate(): Promise<void> {
     const update = await check();
 
     if (update) {
@@ -51,16 +49,6 @@ export class AppComponent implements OnInit {
 
       console.log("update installed");
     }
-  }
-  greetingMessage = "";
-
-  greet(event: SubmitEvent, name: string): void {
-    event.preventDefault();
-
-    // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
-    invoke<string>("greet", { name }).then((text) => {
-      this.greetingMessage = text;
-    });
   }
 
   async getAppVersion() {
