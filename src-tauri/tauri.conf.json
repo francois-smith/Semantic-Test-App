@@ -42,7 +42,7 @@
         "https://github.com/francois-smith/Semantic-Test-App/releases/latest/download/latest.json"
       ],
       "windows": {
-        "installMode": "basicUi"
+        "installMode": "passive"
       }
     }
   }
